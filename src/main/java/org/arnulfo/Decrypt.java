@@ -45,25 +45,16 @@ public class Decrypt
         // Decode Base64 body
         byte[] binaryBody = Base64.getDecoder().decode(body);
 
-        // Remove Tag from the cipher text
-        // First retrieve Tag bytes
-        byte[] tag =  Arrays.copyOf(binaryBody, GCM_TAG_LENGTH);
-        //byte[] tag =  Arrays.copyOfRange(binaryBody, binaryBody.length - GCM_TAG_LENGTH, binaryBody.length);
+        // First retrieve AAD bytes
+        byte[] aad =  Arrays.copyOf(binaryBody, GCM_AAD_LENGTH);
 
         // Remove Tag from the binary body to have the cipher text
-        byte[] cipherText = Arrays.copyOfRange(binaryBody, GCM_TAG_LENGTH, binaryBody.length);
-        //byte[] cipherText =  Arrays.copyOf(binaryBody, binaryBody.length);
-        //byte[] cipherText = Arrays.copyOfRange(binaryBody, 0, binaryBody.length - GCM_TAG_LENGTH);
-
-        // Prepare AAD by copying the first 16 bytes from cipher text.
-        byte[] aad = Arrays.copyOf(cipherText, GCM_AAD_LENGTH);
-        System.out.println("aad.length=" + aad.length);
+        byte[] cipherText = Arrays.copyOfRange(binaryBody, GCM_AAD_LENGTH, binaryBody.length);
 
         // Prepare NONCE (IV) by copying bytes 4 – 16 from AAD. 
         byte[] iv = Arrays.copyOfRange(aad, 4, 16);
         System.out.println("iv.length=" + iv.length);
 
-        //
         SecretKeySpec secretKeySpec = new SecretKeySpec(cypherKey, "AES");
         
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
