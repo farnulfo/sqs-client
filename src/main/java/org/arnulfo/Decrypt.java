@@ -48,7 +48,7 @@ public class Decrypt
         // First retrieve AAD bytes
         byte[] aad =  Arrays.copyOf(binaryBody, GCM_AAD_LENGTH);
 
-        // Remove Tag from the binary body to have the cipher text
+        // Remove AAD from the binary body to have the cipher text
         byte[] cipherText = Arrays.copyOfRange(binaryBody, GCM_AAD_LENGTH, binaryBody.length);
 
         // Prepare NONCE (IV) by copying bytes 4 – 16 from AAD. 
