@@ -25,7 +25,7 @@ public class Decrypt
         byte[] cypherKey = Base64.getDecoder().decode(cryptographyKey);
 
         // Load body
-        Path path = Paths.get("/home/codespace/workspace/sqs-client/body.txt");
+        Path path = Paths.get("/workspaces/sqs-client/body.txt");
         String body = Files.readAllLines(path).get(0);
         System.out.println("Body:");
         System.out.println(body);
