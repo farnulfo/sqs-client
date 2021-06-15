@@ -1,25 +1,13 @@
 package org.arnulfo;
 
-import java.util.Base64;
-import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.Arrays;
+import java.util.Base64;
+
 import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.GCMParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Decrypt 
@@ -30,7 +18,7 @@ public class Decrypt
     public static final int GCM_NONCE_LENGTH = 12;
 
     public static void main( String[] args ) throws Exception {
-        String cryptographyKey = System.getenv().get("CRYPTO_KEY");
+        String cryptographyKey = System.getenv().get("NEWS_CRYPTO_KEY");
         System.out.println(cryptographyKey);
 
         // Decode Base64 cypher key
